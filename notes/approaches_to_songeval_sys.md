@@ -1,5 +1,3 @@
-Creating a neural network to separate vocals from a song is an interesting project! Let's break down your approach and discuss how you can check for similarity between the extracted vocals.
-
 1. **Vocal Separation**:
     - You've mentioned using a binary mask to extract vocals. This is a common approach, and it's great that you're considering it.
     - Convolutional Neural Networks (CNNs) are suitable for audio signal processing tasks. Your plan of using two CNN layers followed by three dense layers is reasonable.

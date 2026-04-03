@@ -1,45 +1,61 @@
-import streamlit as st
+from pathlib import Path
 import sys
-import os
-sys.path.insert(0, os.path.abspath('D:\Yash Mulik Study\Mini-Project\github_codespace\Song-Evaulation-System\webapp'))
-from eval_code import Audio_eval
+
+import streamlit as st
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from eval_code import AudioEval
 
 
-audio_eval = Audio_eval()
+audio_eval = AudioEval()
+
+
+def _grade_from_score(score: float) -> str:
+    if score < 2000:
+        return "A"
+    if 2000 <= score < 6000:
+        return "B"
+    if 6000 <= score < 12000:
+        return "C"
+    if 12000 <= score < 17000:
+        return "D"
+    return "F"
+
 
 def main():
     st.markdown(
         """
-        <h1 style='text-align: center; color: white;'>🎙️Evaluation Page🎙️</h1>
-        """
-    , unsafe_allow_html=True)
+        <h1 style='text-align: center; color: white;'>🎙️ Evaluation Page 🎙️</h1>
+        """,
+        unsafe_allow_html=True,
+    )
     st.divider()
-    st.write("To evaluate your singing proficiency, please upload your audio file as well as the original song. The evaluation process begins as soon as the two files are uploaded")
-
+    st.write(
+        "Upload your singing audio (WAV) and the matching original track (WAV). "
+        "The app then runs vocal extraction and computes comparison features."
+    )
     st.divider()
 
-    uploaded_file = st.file_uploader("👨User Song👩", type=["wav"])
-
+    uploaded_file = st.file_uploader("👨 User Song", type=["wav"])
     st.divider()
-    
-    original_file = st.file_uploader("👨‍🎤Original Song👩‍🎤", type=['wav'])
+    original_file = st.file_uploader("👨‍🎤 Original Song", type=["wav"])
 
-    if uploaded_file and original_file is not None:
-        # Process the uploaded file
-        evaluation_results = audio_eval.final_merge(uploaded_file, original_file)
-        grade = None
-        if evaluation_results < 2000:
-            grade = 'A'
-        elif evaluation_results >= 200 and evaluation_results < 6000:
-            grade = 'B'
-        elif evaluation_results >=6000 and evaluation_results < 12000:
-            grade = 'C'
-        elif evaluation_results >=12000 and evaluation_results < 17000:
-            grade = 'D'
-        elif evaluation_results >= 17000:
-            grade = 'F'
-        st.write("Evaluation Results: You have recieved GRADE : ", grade)
-        # st.experimental_rerun()
+    if uploaded_file is not None and original_file is not None:
+        results = audio_eval.final_merge(uploaded_file, original_file)
+        score = results["final_error"]
+        grade = _grade_from_score(score)
+
+        st.subheader(f"Evaluation Results: Grade {grade}")
+        st.write(f"Final error score: {score:.2f}")
+        st.pyplot(results["figure_audio"])
+        st.pyplot(results["figure_pitch"])
+
+        with st.expander("Show feature-level metrics"):
+            st.json(results["metrics"])
+
 
 if __name__ == "__main__":
     main()

@@ -1,3 +1,49 @@
 notebooks/data
 notebooks/cifar_net.pth
 .ipynb_checkpoints/
+data/
+
+# Python cache/build artifacts
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.dylib
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+.env
+
+# Notebook artifacts
+.ipynb_checkpoints/
+
+# Logs/temp
+*.log
+*.tmp
+*.temp
+
+# Binary/audio/model/archive artifacts
+*.pth
+*.pt
+*.onnx
+*.bin
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.zip
+*.rar
+
+# Project data and generated outputs
+/data/
+/research/
+
+# Keep OpenUnmix model configs tracked
+!model/separator.json
+!model/vocals.json
+!model/vocals-b62c91ce.pth

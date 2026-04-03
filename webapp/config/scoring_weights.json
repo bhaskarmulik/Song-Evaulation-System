@@ -1,0 +1,8 @@
+{
+  "mfcc_error": 0.003,
+  "energy_error": 0.002,
+  "rop_error": 0.001,
+  "singing_power_ratio": 0.14,
+  "delta_pitch_error": 1.1,
+  "median_pitch_error": 1.0
+}

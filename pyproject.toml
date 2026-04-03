@@ -5,16 +5,18 @@ description = "Streamlit app for singing performance evaluation using vocal sepa
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+  "librosa",
+  "matplotlib",
+  "numpy",
   "openunmix",
+  "pandas",
+  "scikit-learn",
+  "scipy",
+  "soundfile",
+  "SQLAlchemy",
+  "streamlit",
   "torch",
   "torchaudio",
-  "librosa",
-  "numpy",
-  "soundfile",
-  "scipy",
-  "pandas",
-  "streamlit",
-  "matplotlib",
 ]
 
 [tool.uv]

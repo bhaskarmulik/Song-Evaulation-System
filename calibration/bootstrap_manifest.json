@@ -1,0 +1,23 @@
+[
+  {
+    "user_name": "demo-singer",
+    "reference_song": "Bones",
+    "cover_path": "data/Anukritis Soulful Cover of Bones Will Give You Chills.mp3",
+    "original_path": "data/Imagine Dragons  Bones Lyrics.mp3",
+    "label_score": 78
+  },
+  {
+    "user_name": "demo-singer",
+    "reference_song": "Tattoo",
+    "cover_path": "data/songs/songs/Tattoo Cover.mp3",
+    "original_path": "data/songs/songs/Tatto Original.mp3",
+    "quality_class": "perfect"
+  },
+  {
+    "user_name": "demo-singer",
+    "reference_song": "Night Changes",
+    "cover_path": "data/songs/songs/Night Changes Cover.mp3",
+    "original_path": "data/songs/songs/\u2018Night changes' Original .mp3",
+    "quality_class": "bad"
+  }
+]

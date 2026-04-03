@@ -1,8 +1,3 @@
-notebooks/data
-notebooks/cifar_net.pth
-.ipynb_checkpoints/
-data/
-
 # Python cache/build artifacts
 __pycache__/
 *.py[cod]
@@ -39,11 +34,15 @@ venv/
 *.zip
 *.rar
 
-# Project data and generated outputs
-/data/
-/research/
+# Runtime state and generated assets
+instance/
+storage/
+calibration/artifacts/
 
-# Keep OpenUnmix model configs tracked
+# Project data and research workspaces
+data/
+research/
+
+# Keep OpenUnmix configs tracked
 !model/separator.json
 !model/vocals.json
-!model/vocals-b62c91ce.pth

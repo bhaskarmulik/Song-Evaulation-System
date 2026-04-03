@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def main():
-    st.set_page_config(page_title="Song Evaluation System", page_icon="🎤", layout="centered")
+    st.set_page_config(page_title="Song Evaluation System", page_icon="🎤", layout="wide")
 
     st.markdown(
         """
@@ -16,7 +16,7 @@ def main():
         <strong style='text-align: left; color: white;'>
         Welcome to the Song Evaluation System. This app evaluates a cover performance by
         comparing uploaded user and original tracks with MFCC, pitch, energy, and singing
-        power features. Use the Streamlit Pages navigation to open the Evaluation page.
+        power features. Use the Streamlit sidebar to move between evaluation and results.
         </strong>
         """,
         unsafe_allow_html=True,
@@ -30,20 +30,21 @@ def main():
         unsafe_allow_html=True,
     )
     st.write(
-        "This system isolates vocals with OpenUnmix before extracting and comparing "
-        "acoustic features from both songs."
+        "This system isolates vocals with OpenUnmix, aligns cover and reference features "
+        "with Dynamic Time Warping, and stores every evaluation in SQLite so progress is visible over time."
     )
 
-    st.header("🎼 Pitch Features Used")
-    st.markdown("- **Pitch Detection**: Identifies pitch values throughout the song.")
-    st.markdown("- **Median Subtraction**: Normalizes pitch fluctuations.")
-    st.markdown("- **Pitch Error Calculation**: Compares user and original pitch behavior.")
-
-    st.header("🔊 Features")
-    st.markdown("- **MFCC Analysis** for timbral/phonetic information.")
-    st.markdown("- **Energy Error Calculation** for loudness contour differences.")
-    st.markdown("- **Range of Pitch (RoP) Error** for vocal range differences.")
-    st.markdown("- **Singing Power Ratio** for vocal projection characteristics.")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.header("Evaluation Engine")
+        st.markdown("- **OpenUnmix vocal separation** isolates the singing voice.")
+        st.markdown("- **DTW alignment** reduces penalties from small timing differences.")
+        st.markdown("- **Weighted scoring** combines MFCC, pitch, energy, range, and power metrics.")
+    with col2:
+        st.header("Workflow")
+        st.markdown("- **Evaluation page** uploads files and runs analysis.")
+        st.markdown("- **Session state** keeps the latest result available across pages.")
+        st.markdown("- **Results page** charts the last 10 attempts for each local profile.")
 
 
 if __name__ == "__main__":
